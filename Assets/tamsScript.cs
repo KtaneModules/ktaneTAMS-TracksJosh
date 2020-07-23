@@ -234,4 +234,23 @@ public class tamsScript : MonoBehaviour
         PickArena();
         PickName();
     }
+    
+    // Autosolver //
+
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            while (arenaSubmits.text != _arenaNames[_arenaIndex])
+            {
+                nextButton.OnInteract();
+                yield return new WaitForSeconds(0.05f);
+                yield return true;
+            }
+            submitButton.OnInteract();
+            yield return new WaitForSeconds(1.5f);
+            TwitchHandleForcedSolve();
+
+        }
+    }
 } 
