@@ -253,4 +253,42 @@ public class tamsScript : MonoBehaviour
 
         }
     }
+    // Twitch Plays //
+#pragma warning disable 414
+    private readonly string TwitchHelpMessage = @"Use !{0} submit arena_name to submit an arena. ";
+#pragma warning disable 414
+    IEnumerator ProcessTwitchCommand(string command)
+    {
+        string[] twitchArena = command.Trim().ToLowerInvariant().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        if (twitchArena.Length > 1 && (twitchArena[0] == "submit"))
+        {
+            command = command.Substring(twitchArena[0].Length).Trim();
+            if (arenaSubmits.text.StartsWith(command, StringComparison.InvariantCultureIgnoreCase))
+            {
+                yield return string.Format("sendtochaterror The arena {0} does not exist in TAMS.", command);
+                yield break;
+            }
+            yield return null;
+            string originalArena = arenaSubmits.text;
+            do
+            {
+                if (arenaSubmits.text.StartsWith(command, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    submitButton.OnInteract();
+                    yield break;
+                }
+                nextButton.OnInteract();
+                yield return new WaitForSeconds(0.1f);
+            }
+            while (arenaSubmits.text != originalArena);
+            yield return "sendtochaterror The arena {0} does not exist in TAMS.";
+            yield break;
+        }
+        if (twitchArena.Length > 1 && (twitchArena[0] != "submit"))
+        {
+            yield return string.Format("TAMS does not recognize that command.", command);
+            yield return null;
+        }
+
+    }
 } 
