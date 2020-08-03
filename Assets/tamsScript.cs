@@ -263,6 +263,26 @@ public class tamsScript : MonoBehaviour
         if (twitchArena.Length > 1 && (twitchArena[0] == "submit"))
         {
             command = command.Substring(twitchArena[0].Length).Trim();
+            if (twitchArena.Length > 1 && (twitchArena[1] == "church campgrounds"))
+            {
+                submitButton.OnInteract();
+                yield break;
+            }
+            if (twitchArena.Length > 1 && (twitchArena[1] == "Church campgrounds"))
+            {
+                submitButton.OnInteract();
+                yield break;
+            }
+            if (twitchArena.Length > 1 && (twitchArena[1] == "church Campgrounds"))
+            {
+                submitButton.OnInteract();
+                yield break;
+            }
+            if (twitchArena.Length > 1 && (twitchArena[1] == "Church Campgrounds"))
+            {
+                submitButton.OnInteract();
+                yield break;
+            }
             if (arenaSubmits.text.StartsWith(command, StringComparison.InvariantCultureIgnoreCase))
             {
                 yield return string.Format("sendtochaterror The arena {0} does not exist in TAMS.", command);
