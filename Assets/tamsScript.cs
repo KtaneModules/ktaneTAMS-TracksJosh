@@ -90,6 +90,7 @@ public class tamsScript : MonoBehaviour
                     bombModule.HandlePass();
                     _isSolved = true;
                     TAMSAnimation();
+                    SubmitFinished();
                 }
                 else
                 {
@@ -166,6 +167,12 @@ public class tamsScript : MonoBehaviour
     void PrevUpdate()
     {
         arenaSubmits.text = _submitNames[_arenaSubmitt[_displayedSubmit]];
+    }
+    
+    void SubmitFinished()
+    {
+        _displayedSubmit = 0;
+        arenaSubmits.text = _arenaNamesFinished[_arenaSubmitt[_displayedSubmit]];
     }
 
     void PickName()
@@ -255,7 +262,7 @@ public class tamsScript : MonoBehaviour
     }
     // Twitch Plays //
 #pragma warning disable 414
-    private readonly string TwitchHelpMessage = @"Use !{0} submit arena_name to submit an arena. ";
+    private readonly string TwitchHelpMessage = @"Use !{0} submit arena_name to submit an arena. Example: !{0} submit Church Campgrounds";
 #pragma warning disable 414
     IEnumerator ProcessTwitchCommand(string command)
     {
