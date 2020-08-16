@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Linq;
 using KModkit;
 using Rnd = UnityEngine.Random;
-
+using System;
 
 public class tamsScript : MonoBehaviour
 
@@ -35,6 +35,7 @@ public class tamsScript : MonoBehaviour
 
     private static string[] _arenaNames = new[] { "Church Campgrounds", "Pyramid Temple", "Neon", "Cherry Feelings", "Picnic Area", "Antarctica", "The End", "Bungee", "Village", "Boat", "Stronghold", "Pokemon Arena", "Legendary Arena", "Rome", "Monument", "Beach", "Woodland Mansion", "Cave", "Mushrooms", "Nether", "Jungle", "Primal", "War Grounds", "Original", "Landfall's Development", "Advent Calendar", "Pevensey Castle", "Track and Field", "Dragon", "Dead Forest", "Mars", "Skirn-E", "Corruption", "Crimson", "Area 51" };
     private static string[] _submitNames = new[] { "Church Campgrounds", "Pyramid Temple", "Neon", "Cherry Feelings", "Picnic Area", "Antarctica", "The End", "Bungee", "Village", "Boat", "Stronghold", "Pokemon Arena", "Legendary Arena", "Rome", "Monument", "Beach", "Woodland Mansion", "Cave", "Mushrooms", "Nether", "Jungle", "Primal", "War Grounds", "Original", "Landfall's Development", "Advent Calendar", "Pevensey Castle", "Track and Field", "Dragon", "Dead Forest", "Mars", "Skirn-E", "Corruption", "Crimson", "Area 51" };
+    private static string[] _arenaNamesFinished = new[] { "Arena" };
 
     public KMSelectable nextButton;
     public KMSelectable submitButton;
@@ -47,7 +48,7 @@ public class tamsScript : MonoBehaviour
 
     void Start()
     {
-        
+
         moduleId = moduleIdCounter++;
         bombModule.OnActivate += Activate;
         _animationSequence = 0;
@@ -160,7 +161,7 @@ public class tamsScript : MonoBehaviour
             _displayedSubmit = (_displayedSubmit + 34) % _submitNames.Length;
             PrevUpdate();
         }
-        
+
     }
 
 
@@ -168,7 +169,7 @@ public class tamsScript : MonoBehaviour
     {
         arenaSubmits.text = _submitNames[_arenaSubmitt[_displayedSubmit]];
     }
-    
+
     void SubmitFinished()
     {
         _displayedSubmit = 0;
@@ -179,7 +180,10 @@ public class tamsScript : MonoBehaviour
     {
         if (_arenaStages == 4)
         {
-
+            _arenaSubmitt = Enumerable.Range(0, _submitNames.Length).ToArray();
+            _arenaSubmit = Rnd.Range(0, 1);
+            arenaSubmits.text = _submitNames[_arenaSubmit];
+            _arenaSubmit = _arenaSubmitt[_displayedSubmit];
         }
         else
         {
@@ -241,7 +245,7 @@ public class tamsScript : MonoBehaviour
         PickArena();
         PickName();
     }
-    
+
     // Autosolver //
 
     IEnumerator TwitchHandleForcedSolve()
@@ -251,7 +255,7 @@ public class tamsScript : MonoBehaviour
             while (arenaSubmits.text != _arenaNames[_arenaIndex])
             {
                 nextButton.OnInteract();
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.1f);
                 yield return true;
             }
             submitButton.OnInteract();
@@ -260,6 +264,7 @@ public class tamsScript : MonoBehaviour
 
         }
     }
+
     // Twitch Plays //
 #pragma warning disable 414
     private readonly string TwitchHelpMessage = @"Use !{0} submit arena_name to submit an arena. Example: !{0} submit Church Campgrounds";
@@ -290,9 +295,9 @@ public class tamsScript : MonoBehaviour
                 submitButton.OnInteract();
                 yield break;
             }
-            if (arenaSubmits.text.StartsWith(command, StringComparison.InvariantCultureIgnoreCase))
+            if (arenaSubmits.text.StartsWith(command, StringComparison.InvariantCultureIgnoreCase) && twitchArena[1] == "Church Campgrounds")
             {
-                yield return string.Format("sendtochaterror The arena {0} does not exist in TAMS.", command);
+                yield return string.Format("sendtochaterror That arena does not exist in TAMS.");
                 yield break;
             }
             yield return null;
@@ -308,7 +313,7 @@ public class tamsScript : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
             while (arenaSubmits.text != originalArena);
-            yield return "sendtochaterror The arena {0} does not exist in TAMS.";
+            yield return "sendtochaterror That arena does not exist in TAMS.";
             yield break;
         }
         if (twitchArena.Length > 1 && (twitchArena[0] != "submit"))
@@ -316,6 +321,11 @@ public class tamsScript : MonoBehaviour
             yield return string.Format("TAMS does not recognize that command.", command);
             yield return null;
         }
+        if (twitchArena.Length > 1 && (twitchArena[1] != arenaSubmits.text))
+        {
+            yield return string.Format("sendtochaterror That arena does not exist in TAMS.", command);
+            yield return null;
+        }
 
     }
-} 
+}
