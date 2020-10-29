@@ -127,7 +127,7 @@ public class tamsScript : MonoBehaviour
         else
         {
             _arenaOrder = Enumerable.Range(0, _arenaNames.Length).ToArray().Shuffle();
-            _arenaIndex = Rnd.Range(0, 33);
+            _arenaIndex = Rnd.Range(0, 35);
             arenaRender.material = arenaOptions[_arenaIndex];
         }
     }
