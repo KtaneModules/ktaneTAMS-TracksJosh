@@ -4160,6 +4160,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 58e5e00785c326c4795f665dab16a7ed, type: 2}
   - {fileID: 2100000, guid: ae1a25a98705ad14385c9c58b8296a23, type: 2}
   - {fileID: 2100000, guid: 5078709ba97ef5e4bb4971d8e4e8502c, type: 2}
+  - {fileID: 2100000, guid: 1f2f9b5b9bd07574c944d5d8918a9b24, type: 2}
   arenaAnim:
   - {fileID: 2100000, guid: 01e936e6926785143855a06907df0683, type: 2}
   - {fileID: 2100000, guid: 01e936e6926785143855a06907df0683, type: 2}
