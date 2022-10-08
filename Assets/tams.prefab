@@ -4077,10 +4077,9 @@ MonoBehaviour:
   Children:
   - {fileID: 114171677126561076}
   - {fileID: 114996699614175766}
-  - {fileID: 114996699614175766}
   - {fileID: 114631867337662628}
   IsPassThrough: 0
-  ChildRowLength: 1
+  ChildRowLength: 3
   Highlight: {fileID: 114900512383272386}
   SelectableColliders: []
   DefaultSelectableIndex: 0
@@ -4123,7 +4122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a8474e9535a36948bb59b8ccf19bf0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 0}
+  audio: {fileID: 114469271030487534}
   bombModule: {fileID: 114802396144967170}
   arenaOptions:
   - {fileID: 2100000, guid: df4ab5b16aff9804c94e9b6de8aa48d8, type: 2}

@@ -29,6 +29,6 @@ MonoBehaviour:
 
 
     Beep Sound: https://www.youtube.com/watch?v=vynnzHAb6hg'
-  version: 1.0
+  version: 1.23000001
   outputFolder: build
   previewImage: {fileID: 2800000, guid: 37924d94d3ffb57478ec04915d264105, type: 3}
